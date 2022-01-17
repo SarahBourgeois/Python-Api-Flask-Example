@@ -17,10 +17,5 @@ home_api = Blueprint('api', __name__)
     }
 })
 def welcome():
-    """
-    1 liner about the route
-    A more detailed description of the endpoint
-    ---
-    """
     result = HomeModel()
     return HomeSchema().dump(result), 200

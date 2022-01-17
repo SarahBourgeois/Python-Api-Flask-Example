@@ -1,17 +1,21 @@
 from flask import Flask
 from flasgger import Swagger
 from api.route.homeRoute import home_api
+from api.route.productRoute import  product_api
 
 def create_app():
     app = Flask(__name__)
 
+
     app.config['SWAGGER'] = {
         'title': 'Python API with flask',
+        'version' : '1.0.0' ,
     }
     swagger = Swagger(app)
 
     app.register_blueprint(home_api, url_prefix='/api')
-
+    app.register_blueprint(product_api, url_prefix='/api/product')
+    
     return app
 
 
