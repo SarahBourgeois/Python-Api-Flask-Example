@@ -14,7 +14,7 @@ def create_app():
     swagger = Swagger(app)
 
     app.register_blueprint(home_api, url_prefix='/api')
-    app.register_blueprint(product_api, url_prefix='/api/product')
+    app.register_blueprint(product_api, url_prefix='/api/v1/product/')
     
     return app
 

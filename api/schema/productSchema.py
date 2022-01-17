@@ -7,7 +7,7 @@ class ProductSchema(Schema):
         # Fields to expose
         fields = ["index", "name", "price", "category"]
 
-    index = Number()
+    id = Number()
     name = Str()
     price = Number()
     category = Str()
