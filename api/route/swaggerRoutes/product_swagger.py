@@ -38,7 +38,7 @@ add_new_product = {
                 "schema": ProductSchema,
                 "name": "productDto",
                 "in": "body",
-                "required": True,
+                "required": False,
                 "type": "object",
                 "description": "product to add"
             },

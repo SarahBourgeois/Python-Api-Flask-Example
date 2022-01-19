@@ -1,18 +1,26 @@
 
-   
-from unicodedata import name
-from api.schema.productSchema import Product
+from api.model.productModel import Product
+from api.schema.productSchema import ProductSchema
 from flask import make_response
 import json
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
 
 # Add product 
 def add_product_service(product_data):
     try:
-        name = product_data['name']
-        productToAdd = Product(name=name)
-        productToAdd.save()
+        title = product_data['title']
+        description = product_data['description']
+        category = product_data['category']
+        price = product_data['price']
+        productToAdd = Product(title=title, description=description, category=category, price=price)
+        db.session.add(productToAdd)
+        db.session.commit()
         return make_response({'message' : 'succesfully inserted'}, 201)   
     except Exception as e:
+        db.session.rollback()
+        db.session.flush()
         return make_response({'message' : str(e)}, 404)  
 
 
@@ -20,7 +28,7 @@ def add_product_service(product_data):
 def get_productbyid_service(product_id):
     products = []
     try:
-        product_data = Product.objects[:1](id=product_id)
+        product_data = ProductSchema.objects[:1](id=product_id)
         for product in product_data:
             product_data = {}
             product_data['_id'] = str(product.id)
